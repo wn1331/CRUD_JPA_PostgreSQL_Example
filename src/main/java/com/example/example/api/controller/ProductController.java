@@ -54,14 +54,14 @@ public class ProductController {
      */
     @Operation(summary = "상품 조회 요청 by Paging", description = "상품 정보를 페이징하여 조회합니다.", tags = {"ProductController"})
     @GetMapping("/paging")
-    public Page<ProductResponseDTO> find(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5) Pageable pageable){
-        return ps.findAll(pageable);
+    public ResponseEntity<Page<ProductResponseDTO>> find(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+        return ResponseEntity.ok(ps.findAll(pageable));
     }
 
 
     @GetMapping("/ex/{amount}")
-    public List<ProductResponseDTO> ex(@PageableDefault(size = 2) Pageable pageable, @PathVariable int amount){
-        return ps.findByQdsl(pageable, amount);
+    public ResponseEntity<List<ProductResponseDTO>> ex(@PageableDefault(size = 2) Pageable pageable, @PathVariable int amount){
+        return ResponseEntity.ok(ps.findByQdsl(pageable, amount));
     }
 
 }
