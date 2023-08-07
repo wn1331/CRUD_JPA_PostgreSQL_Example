@@ -58,4 +58,10 @@ public class ProductController {
         return ps.findAll(pageable);
     }
 
+
+    @GetMapping("/ex")
+    public List<ProductResponseDTO> ex(){
+        return ps.findByQdsl();
+    }
+
 }
