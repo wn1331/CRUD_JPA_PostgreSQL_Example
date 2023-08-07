@@ -7,6 +7,8 @@ import com.example.example.domain.domain1.entity.Product;
 import com.example.example.domain.domain1.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -67,7 +69,8 @@ public class ProductService {
         return product.toDto();
     }
 
-    public List<Product> findAllByPaging() {
-        return pr.findAll();
+
+    public Page<ProductResponseDTO> findAll(Pageable pageable) {
+        return pr.findAll(pageable).map(Product::toDto);
     }
 }
