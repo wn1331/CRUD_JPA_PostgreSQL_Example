@@ -66,4 +66,8 @@ public class ProductService {
         Product product = pr.findById(id).orElseThrow(()->new IllegalArgumentException("해당 제품이 없습니다.."));
         return product.toDto();
     }
+
+    public List<Product> findAllByPaging() {
+        return pr.findAll();
+    }
 }

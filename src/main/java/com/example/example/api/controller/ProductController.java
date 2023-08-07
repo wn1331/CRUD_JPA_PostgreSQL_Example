@@ -4,8 +4,10 @@ import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
 import com.example.example.api.response.ProductResponseDTO;
 import com.example.example.application.service.ProductService;
+import com.example.example.domain.domain1.entity.Product;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +44,12 @@ public class ProductController {
     @GetMapping("/get/{id}")
     public ResponseEntity<ProductResponseDTO> getProduct(@PathVariable Long id){
         return ResponseEntity.ok(ps.getProduct(id));
+    }
+
+    @Operation(summary = "상품 조회 요청 by Paging", description = "상품 정보를 페이징하여 조회합니다.", tags = {"ProductController"})
+    @GetMapping("/paging")
+    public List<Product> find(Pageable pageable){
+        return ps.findAllByPaging();
     }
 
 }
