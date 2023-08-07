@@ -1,7 +1,6 @@
 package com.example.example.domain.product.repository;
 
 import com.example.example.domain.product.entity.Product;
-import com.example.example.domain.product.entity.QProduct;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,9 +15,9 @@ public class ProductCustomRepositoryImpl implements ProductCustomRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Product> findAllProductsOrderByDescWhereAmountisDistinct() {
+    public List<Product> findAllProductsOrderByDescWhereAmountisDistinct(int amount) {
         return jpaQueryFactory.selectFrom(product)
-                .where(product.amount.eq(1111))
+                .where(product.amount.eq(amount))
                 .orderBy(product.id.asc())
                 .fetch();
     }

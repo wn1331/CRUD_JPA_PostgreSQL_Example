@@ -5,6 +5,6 @@ import com.example.example.domain.product.entity.Product;
 import java.util.List;
 
 public interface ProductCustomRepository {
-    List<Product> findAllProductsOrderByDescWhereAmountisDistinct();
+    List<Product> findAllProductsOrderByDescWhereAmountisDistinct(int amount);
     List<Product> findAllInnerFetchJoinWithDistinct();
 }

@@ -59,9 +59,9 @@ public class ProductController {
     }
 
 
-    @GetMapping("/ex")
-    public List<ProductResponseDTO> ex(){
-        return ps.findByQdsl();
+    @GetMapping("/ex/{amount}")
+    public List<ProductResponseDTO> ex(@PathVariable int amount){
+        return ps.findByQdsl(amount);
     }
 
 }

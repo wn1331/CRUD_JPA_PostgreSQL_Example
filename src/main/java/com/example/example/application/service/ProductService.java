@@ -4,22 +4,16 @@ import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
 import com.example.example.api.response.ProductResponseDTO;
 import com.example.example.domain.product.entity.Product;
-import com.example.example.domain.product.entity.QProduct;
 import com.example.example.domain.product.repository.ProductCustomRepository;
 import com.example.example.domain.product.repository.ProductRepository;
-import com.querydsl.jpa.impl.JPAQuery;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -73,9 +67,9 @@ public class ProductService {
         return pr.findAll(pageable).map(Product::toDto);
     }
 
-    public List<ProductResponseDTO> findByQdsl(){
+    public List<ProductResponseDTO> findByQdsl(int amount) {
         List<ProductResponseDTO> productList = new ArrayList<>();
-        pcr.findAllProductsOrderByDescWhereAmountisDistinct()
+        pcr.findAllProductsOrderByDescWhereAmountisDistinct(amount)
                 .forEach(product -> productList.add(product.toDto()));
         return productList;
     }
