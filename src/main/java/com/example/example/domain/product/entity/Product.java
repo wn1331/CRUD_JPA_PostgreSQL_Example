@@ -1,4 +1,4 @@
-package com.example.example.domain.domain1.entity;
+package com.example.example.domain.product.entity;
 
 import com.example.example.api.response.ProductResponseDTO;
 import jakarta.persistence.Entity;
@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +22,8 @@ public class Product {
 
     private int amount;
 
+    @Builder
     public Product(String name, int amount) {
-        this.name = name;
-        this.amount = amount;
-    }
-
-    public Product(Long id, String name, int amount){
-        this.id = id;
         this.name = name;
         this.amount = amount;
     }
@@ -37,4 +31,11 @@ public class Product {
     public ProductResponseDTO toDto() {
         return new ProductResponseDTO(id, name, amount);
     }
+
+    public Product update(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
+        return this;
+    }
+
 }

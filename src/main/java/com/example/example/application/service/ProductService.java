@@ -3,8 +3,8 @@ package com.example.example.application.service;
 import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
 import com.example.example.api.response.ProductResponseDTO;
-import com.example.example.domain.domain1.entity.Product;
-import com.example.example.domain.domain1.repository.ProductRepository;
+import com.example.example.domain.product.entity.Product;
+import com.example.example.domain.product.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,15 +45,7 @@ public class ProductService {
     public ProductResponseDTO updateProduct(UpdateProductRequestDTO req) {
         Product product = pr.findById(req.id())
                 .orElseThrow(() -> new NotFoundException("해당하는 id의 제품을 찾을 수 없습니다!"));
-
-        Product updatedProduct = Product.builder()
-                .id(req.id())
-                .name(req.name() != null ? req.name() : product.getName())
-                .amount(req.amount() != null ? req.amount() : product.getAmount())
-                .build();
-        pr.save(updatedProduct);
-
-        return updatedProduct.toDto();
+        return pr.save(product.update(req.name(),req.amount())).toDto();
     }
     
     public List<ProductResponseDTO> getProductList(){

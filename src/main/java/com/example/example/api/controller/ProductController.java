@@ -48,7 +48,7 @@ public class ProductController {
         return ResponseEntity.ok(ps.getProduct(id));
     }
     /**
-     * @URL http://localhost:8085/paging?page=1....
+     * @URL http://localhost:8085/paging?page=0....
      * @param pageable
      * @return
      */
