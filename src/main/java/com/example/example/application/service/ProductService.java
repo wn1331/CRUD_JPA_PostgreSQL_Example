@@ -67,9 +67,9 @@ public class ProductService {
         return pr.findAll(pageable).map(Product::toDto);
     }
 
-    public List<ProductResponseDTO> findByQdsl(int amount) {
+    public List<ProductResponseDTO> findByQdsl(Pageable pageable, int amount) {
         List<ProductResponseDTO> productList = new ArrayList<>();
-        pcr.findAllProductsOrderByDescWhereAmountisDistinct(amount)
+        pcr.findAllProductsOrderByDescWhereAmountisDistinct(pageable, amount)
                 .forEach(product -> productList.add(product.toDto()));
         return productList;
     }

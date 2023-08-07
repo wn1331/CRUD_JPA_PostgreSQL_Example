@@ -60,8 +60,8 @@ public class ProductController {
 
 
     @GetMapping("/ex/{amount}")
-    public List<ProductResponseDTO> ex(@PathVariable int amount){
-        return ps.findByQdsl(amount);
+    public List<ProductResponseDTO> ex(@PageableDefault(size = 2) Pageable pageable, @PathVariable int amount){
+        return ps.findByQdsl(pageable, amount);
     }
 
 }

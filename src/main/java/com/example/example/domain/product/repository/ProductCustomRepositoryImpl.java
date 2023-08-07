@@ -3,6 +3,7 @@ package com.example.example.domain.product.repository;
 import com.example.example.domain.product.entity.Product;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -15,9 +16,11 @@ public class ProductCustomRepositoryImpl implements ProductCustomRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Product> findAllProductsOrderByDescWhereAmountisDistinct(int amount) {
+    public List<Product> findAllProductsOrderByDescWhereAmountisDistinct(Pageable pageable, int amount) {
         return jpaQueryFactory.selectFrom(product)
                 .where(product.amount.eq(amount))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(product.id.asc())
                 .fetch();
     }
