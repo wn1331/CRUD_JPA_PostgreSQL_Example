@@ -2,6 +2,7 @@ package com.example.example.application.service;
 
 import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
+import com.example.example.api.response.ProductJoinUserResponseDTO;
 import com.example.example.api.response.ProductResponseDTO;
 import com.example.example.domain.product.entity.Product;
 import com.example.example.domain.product.repository.ProductCustomRepository;
@@ -71,6 +72,12 @@ public class ProductService {
         List<ProductResponseDTO> productList = new ArrayList<>();
         pcr.findAllProductsOrderByDescWhereAmountisDistinct(pageable, amount)
                 .forEach(product -> productList.add(product.toDto()));
+        return productList;
+    }
+
+    public List<ProductJoinUserResponseDTO> findProductJoinUserByQdsl(Pageable pageable, String email){
+        List<ProductJoinUserResponseDTO> productList = new ArrayList<>();
+        pcr.findAllProductsJoinUser(pageable, email).forEach(product -> productList.add(product.toJoinUserDto()));
         return productList;
     }
 }

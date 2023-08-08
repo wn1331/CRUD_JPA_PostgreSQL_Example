@@ -1,5 +1,6 @@
 package com.example.example.domain.product.entity;
 
+import com.example.example.api.response.ProductJoinUserResponseDTO;
 import com.example.example.api.response.ProductResponseDTO;
 import com.example.example.domain.BaseEntity;
 import com.example.example.domain.user.entity.User;
@@ -41,6 +42,10 @@ public class Product extends BaseEntity {
         this.name = name;
         this.amount = amount;
         return this;
+    }
+
+    public ProductJoinUserResponseDTO toJoinUserDto(){
+        return new ProductJoinUserResponseDTO(name,amount,user.getEmail(),this.getCreateDate(),this.getUpdateDate());
     }
 
 }
