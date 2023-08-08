@@ -2,6 +2,7 @@ package com.example.example.api.controller;
 
 import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
+import com.example.example.api.response.ProductJoinUserResponseDTO;
 import com.example.example.api.response.ProductResponseDTO;
 import com.example.example.application.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -58,10 +59,16 @@ public class ProductController {
         return ResponseEntity.ok(ps.findAll(pageable));
     }
 
-
+    @Operation(summary = "상품 조회 요청 by Paging(Qdsl 사용)", description = "상품 정보를 페이징하여 조회합니다.", tags = {"ProductController"})
     @GetMapping("/ex/{amount}")
     public ResponseEntity<List<ProductResponseDTO>> ex(@PageableDefault(size = 2) Pageable pageable, @PathVariable int amount){
         return ResponseEntity.ok(ps.findByQdsl(pageable, amount));
+    }
+
+    @Operation(summary = "상품 조회 요청 by Paging(Qdsl 사용 & User Join함)", description = "상품 정보와 해당 관리자 이메일을 페이징하여 조회합니다.", tags = {"ProductController"})
+    @GetMapping("/ex2/{email}")
+    public ResponseEntity<List<ProductJoinUserResponseDTO>> ex2(@PageableDefault(size = 2) Pageable pageable, @PathVariable String email){
+        return ResponseEntity.ok(ps.findProductJoinUserByQdsl(pageable, email));
     }
 
 }

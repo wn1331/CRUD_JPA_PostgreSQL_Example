@@ -26,7 +26,15 @@ public class ProductCustomRepositoryImpl implements ProductCustomRepository{
     }
 
     @Override
-    public List<Product> findAllInnerFetchJoinWithDistinct() {
-        return null;
+    public List<Product> findAllProductsJoinUser(Pageable pageable, String email){
+        return jpaQueryFactory.selectFrom(product)
+                .join(product.user)
+                .where(product.user.email.eq(email))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(product.id.asc())
+                .fetch();
     }
+
+
 }

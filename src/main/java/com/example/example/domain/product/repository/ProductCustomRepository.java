@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface ProductCustomRepository {
     List<Product> findAllProductsOrderByDescWhereAmountisDistinct(Pageable pageable, int amount);
-    List<Product> findAllInnerFetchJoinWithDistinct();
+    List<Product> findAllProductsJoinUser(Pageable pageable, String email);
+
+
 }
