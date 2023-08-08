@@ -1,3 +1,4 @@
+//querydsl 추가 1번
 buildscript {
     ext {
         queryDslVersion = "5.0.0"
@@ -8,7 +9,7 @@ plugins {
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
 
-    // querydsl 추가
+    //querydsl 추가 2번
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
@@ -38,12 +39,13 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+//querydsl 추가 3번
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 }
+//querydsl 추가 4번
 // querydsl 설정 시작
 def generated = 'src/main/generated'
 querydsl {
@@ -63,7 +65,8 @@ configurations {
     }
     querydsl.extendsFrom compileClasspath
 }
+//querydsl 설정 끝
 tasks.named('test') {
     useJUnitPlatform()
 }
-//QueryDSL : https://aamoos.tistory.com/454 참조
+//QueryDSL : https://github.com/wn1331/CRUD_JPA_PostgreSQL_Example 참조
