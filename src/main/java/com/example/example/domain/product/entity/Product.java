@@ -1,10 +1,9 @@
 package com.example.example.domain.product.entity;
 
 import com.example.example.api.response.ProductResponseDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.example.domain.BaseEntity;
+import com.example.example.domain.user.entity.User;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product {
+@Table(name = "TABLE_PRODUCT")
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +22,15 @@ public class Product {
 
     private int amount;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
     @Builder
-    public Product(String name, int amount) {
+    public Product(String name, int amount, User user) {
         this.name = name;
         this.amount = amount;
+        this.user = user;
     }
 
     public ProductResponseDTO toDto() {
