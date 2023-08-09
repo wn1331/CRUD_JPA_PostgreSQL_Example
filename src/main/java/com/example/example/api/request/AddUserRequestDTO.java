@@ -1,7 +1,6 @@
 package com.example.example.api.request;
 
-import com.example.example.domain.product.entity.Product;
-import com.example.example.domain.user.entity.User;
+import com.example.example.domain.user.User;
 
 public record AddUserRequestDTO(String email, String password) {
 
