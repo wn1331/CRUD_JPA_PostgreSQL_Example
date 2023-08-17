@@ -1,10 +1,15 @@
 package com.example.example.api.request;
 
-import com.example.example.domain.domain1.entity.Product;
+import com.example.example.domain.product.Product;
+import com.example.example.domain.user.User;
 
-public record AddProductRequestDTO(String name, Integer amount) {
+public record AddProductRequestDTO(String name, Integer amount, User user) {
 
     public Product toEntity(){
-        return new Product(name, amount);
+        return Product.builder()
+                .name(name)
+                .amount(amount)
+                .user(user)
+                .build();
     }
 }

@@ -2,14 +2,17 @@ package com.example.example.application.service;
 
 import com.example.example.api.request.AddProductRequestDTO;
 import com.example.example.api.request.UpdateProductRequestDTO;
+import com.example.example.api.response.ProductJoinUserResponseDTO;
 import com.example.example.api.response.ProductResponseDTO;
-import com.example.example.domain.domain1.entity.Product;
-import com.example.example.domain.domain1.repository.ProductRepository;
+import com.example.example.domain.product.Product;
+import com.example.example.infrastructure.repository.ProductCustomRepository;
+import com.example.example.infrastructure.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,8 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository pr;
-
+    private final ProductCustomRepository pcr;
+    
     @Transactional
     public ProductResponseDTO addProduct(AddProductRequestDTO req){
         pr.findByName(req.name())
@@ -43,15 +47,7 @@ public class ProductService {
     public ProductResponseDTO updateProduct(UpdateProductRequestDTO req) {
         Product product = pr.findById(req.id())
                 .orElseThrow(() -> new NotFoundException("해당하는 id의 제품을 찾을 수 없습니다!"));
-
-        Product updatedProduct = Product.builder()
-                .id(req.id())
-                .name(req.name() != null ? req.name() : product.getName())
-                .amount(req.amount() != null ? req.amount() : product.getAmount())
-                .build();
-        pr.save(updatedProduct);
-
-        return updatedProduct.toDto();
+        return pr.save(product.update(req.name(),req.amount())).toDto();
     }
     
     public List<ProductResponseDTO> getProductList(){
@@ -65,5 +61,23 @@ public class ProductService {
     public ProductResponseDTO getProduct(Long id) {
         Product product = pr.findById(id).orElseThrow(()->new IllegalArgumentException("해당 제품이 없습니다.."));
         return product.toDto();
+    }
+
+
+    public Page<ProductResponseDTO> findAll(Pageable pageable) {
+        return pr.findAll(pageable).map(Product::toDto);
+    }
+
+    public List<ProductResponseDTO> findByQdsl(Pageable pageable, int amount) {
+        List<ProductResponseDTO> productList = new ArrayList<>();
+        pcr.findAllProductsOrderByDescWhereAmountisDistinct(pageable, amount)
+                .forEach(product -> productList.add(product.toDto()));
+        return productList;
+    }
+
+    public List<ProductJoinUserResponseDTO> findProductJoinUserByQdsl(Pageable pageable, String email){
+        List<ProductJoinUserResponseDTO> productList = new ArrayList<>();
+        pcr.findAllProductsJoinUser(pageable, email).forEach(product -> productList.add(product.toJoinUserDto()));
+        return productList;
     }
 }
