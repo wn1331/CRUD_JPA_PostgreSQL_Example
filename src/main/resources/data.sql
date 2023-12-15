@@ -24,3 +24,5 @@ VALUES ('우유', 1111,1,current_date,current_date),
        ('휴지통', 1121,1,current_date,current_date),
        ('용지', 1555,2,current_date,current_date),
        ('김밥', 1612,2,current_date,current_date);
+
+INSERT INTO public.table_book (rest_amount, create_at, id, update_at, name, publisher) VALUES (5, '2023-12-15 15:21:56.000000', 1, '2023-12-15 15:21:53.000000', '재고시스템책', 'JH출판');
