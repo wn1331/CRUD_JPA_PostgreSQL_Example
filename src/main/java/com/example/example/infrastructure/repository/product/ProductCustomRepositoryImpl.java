@@ -1,4 +1,4 @@
-package com.example.example.infrastructure.repository;
+package com.example.example.infrastructure.repository.product;
 
 import com.example.example.domain.product.Product;
 import com.querydsl.jpa.impl.JPAQueryFactory;

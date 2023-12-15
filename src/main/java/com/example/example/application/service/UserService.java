@@ -4,7 +4,7 @@ import com.example.example.api.request.AddUserRequestDTO;
 import com.example.example.api.request.UpdateUserRequestDTO;
 import com.example.example.api.response.UserResponseDTO;
 import com.example.example.domain.user.User;
-import com.example.example.infrastructure.repository.UserRepository;
+import com.example.example.infrastructure.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

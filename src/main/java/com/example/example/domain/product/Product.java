@@ -45,7 +45,7 @@ public class Product extends BaseEntity {
     }
 
     public ProductJoinUserResponseDTO toJoinUserDto(){
-        return new ProductJoinUserResponseDTO(name,amount,user.getEmail(),this.getCreateDate(),this.getUpdateDate());
+        return new ProductJoinUserResponseDTO(name,amount,user.getEmail(),this.getCreateAt(),this.getUpdateAt());
     }
 
 }

@@ -1,9 +1,9 @@
-INSERT INTO TABLE_USER(email, password,create_date,update_date) values
+INSERT INTO TABLE_USER(email, password,create_at,update_at) values
                                         ('wn1331@naver.com','020512',current_date,current_date),
                                         ('wnwhdgns12@naver.com','123456',current_date,current_date),
                                         ('wn1331@gmail.com','050505',current_date,current_date);
 
-INSERT INTO TABLE_PRODUCT(name, amount,USER_ID,create_date,update_date)
+INSERT INTO TABLE_PRODUCT(name, amount,USER_ID,create_at,update_at)
 VALUES ('우유', 1111,1,current_date,current_date),
        ('바나나', 1234,2,current_date,current_date),
        ('빵', 1121,3,current_date,current_date),

@@ -27,14 +27,14 @@ public class QProduct extends EntityPathBase<Product> {
     public final NumberPath<Integer> amount = createNumber("amount", Integer.class);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
+    public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath name = createString("name");
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updateDate = _super.updateDate;
+    public final DateTimePath<java.time.LocalDateTime> updateAt = _super.updateAt;
 
     public final com.example.example.domain.user.QUser user;
 

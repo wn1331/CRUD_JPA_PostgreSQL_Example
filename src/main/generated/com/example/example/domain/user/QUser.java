@@ -22,7 +22,7 @@ public class QUser extends EntityPathBase<User> {
     public final com.example.example.domain.QBaseEntity _super = new com.example.example.domain.QBaseEntity(this);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
+    public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;
 
     public final StringPath email = createString("email");
 
@@ -31,7 +31,7 @@ public class QUser extends EntityPathBase<User> {
     public final StringPath password = createString("password");
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updateDate = _super.updateDate;
+    public final DateTimePath<java.time.LocalDateTime> updateAt = _super.updateAt;
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));
