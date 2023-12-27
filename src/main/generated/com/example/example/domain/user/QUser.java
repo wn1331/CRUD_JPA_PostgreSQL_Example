@@ -28,7 +28,13 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath password = createString("password");
+    public final StringPath name = createString("name");
+
+    public final StringPath provider = createString("provider");
+
+    public final StringPath providerId = createString("providerId");
+
+    public final EnumPath<com.example.example.domain.Role> role = createEnum("role", com.example.example.domain.Role.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateAt = _super.updateAt;

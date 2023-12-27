@@ -44,7 +44,7 @@ public class UserService {
     public UserResponseDTO updateUser(UpdateUserRequestDTO req) {
         User user = userRepository.findById(req.id())
                 .orElseThrow(() -> new NotFoundException("해당하는 회원을 찾을 수 없습니다!"));
-        return userRepository.save(user.update(req.email(),req.password())).toDto();
+        return userRepository.save(user.update(req.email(),req.userName(), req.role())).toDto();
     }
 
     public List<UserResponseDTO> getUserList(){

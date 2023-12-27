@@ -2,6 +2,7 @@ package com.example.example.domain.user;
 
 import com.example.example.api.response.UserResponseDTO;
 import com.example.example.domain.BaseEntity;
+import com.example.example.domain.Role;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,23 +18,33 @@ public class User extends BaseEntity {
     @Column(name = "USER_ID")
     private Long id;
 
+    private String name;
+
     private String email;
 
-    private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private String provider;
+    private String providerId;
 
     @Builder
-    public User(String email, String password) {
+    public User(String name, String email, Role role, String provider, String providerId) {
+        this.name = name;
         this.email = email;
-        this.password = password;
+        this.role=role;
+        this.provider = provider;
+        this.providerId = providerId;
     }
 
     public UserResponseDTO toDto() {
-        return new UserResponseDTO(this.id, this.email, this.password);
+        return new UserResponseDTO(this.id,this.name, this.email, this.role);
     }
 
-    public User update(String email, String password) {
+    public User update(String name, String email, Role role) {
+        this.name=name;
         this.email = email;
-        this.password = password;
+        this.role=role;
         return this;
     }
 }
